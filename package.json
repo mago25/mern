@@ -1,5 +1,6 @@
 {
   "name": "C3P1",
+  "repository":"https://github.com/mago25/mern",
   "version": "1.0.0",
   "description": "Ejercicio de prueba Nodejs y MongoDB",
   "main": "main.js",
