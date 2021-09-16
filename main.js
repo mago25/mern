@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-
-const path = require('path');
+const path = require('path'); // path 
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,16 +10,30 @@ app.set('port', 8000);
 
 
 // ========== Middleware - Funciones ==========
-const indexCtrl = async(req, res, next) =>{
+const indexCtrl = async(req, res, next) => {
   try {
-      res.send("Hola mundo");
+      res.sendFile(path.join(__dirname, 'views/login.html'));
   } catch (error) {
       next(error);
   }  
 };
 
+const showCtrl = async(req, res, next) => {
+    try {
+        let idUser = Number(req.body['idUser']);
+        let pwdUser = Number(req.body['pwdUser']);
+
+        console.log(idUser, pwdUser);
+        res.sendFile(path.join(__dirname, 'views/user.html'));
+    } catch (error) {
+        next(error);
+    }  
+  };
+
+
 //========== Rutas ==========
 app.get('/', indexCtrl);
+app.post('/user', showCtrl);
 
 app.all('*', (req, res) =>
     res.status(404).send("Error: resource not found or method not supported.")
